@@ -43,7 +43,7 @@ public class LoginHandler {
         } catch (MalformedURLException e) {
             System.out.println("Incorrect URL");
         } catch (IOException e){
-            System.out.println("Could not open URL connection");
+            System.out.println("Could not open URL connection, check server is running.");
         }
     }
 }
