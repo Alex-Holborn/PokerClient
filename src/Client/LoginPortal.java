@@ -1,5 +1,7 @@
 package Client;
 
+import com.sun.tools.javac.Main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +13,10 @@ public class LoginPortal extends JFrame implements ActionListener {
     private JPanel PasswordPanel;
     private JPanel UsernamePanel;
 
-    public LoginPortal(){
+    private static Client MainClient;
+
+    public LoginPortal(Client main){
+        MainClient = main;
         setTitle("Login");
         setSize(320,280);
         JPanel mainPanel = new JPanel();
@@ -59,15 +64,17 @@ public class LoginPortal extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(LoginButton)){
-            if(attemptLogin()){
+            if(attemptLogin((JTextField) UsernamePanel.getComponent(2), (JTextField) PasswordPanel.getComponent(2))){
                 System.out.println("login successful");
+                MainClient.CloseLogin();
             }else{
                 System.out.println("Login Failed");
             }
         }
     }
 
-    private boolean attemptLogin(){
-        return false;
+    private boolean attemptLogin(JTextField user, JTextField pass){
+        LoginHandler l = new LoginHandler(user.getText(), pass.getText());
+        return true;
     }
 }
